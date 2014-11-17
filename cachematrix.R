@@ -1,7 +1,9 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
+## makeCacheMatrix receives a (hopefully) n x n invertible matrix x
+## and sets up a matrix object to cache the inverse of x
+
 
 makeCacheMatrix <- function(x = matrix()) {
     m <- NULL
@@ -17,18 +19,20 @@ makeCacheMatrix <- function(x = matrix()) {
          getinverse = getinverse)
 }
 
-## Write a short comment describing this function
+## cacheSolve will solve or compute the inverse of the matrix returned by
+## makeCacheMatrix - if the inverse has already been solved/calculated,
+## then the stored inverted matrix is simply returned
 
-cacheSolve <- function(x, ...) { ## return a matrix that is the inverse of 'x'
-    m <- x$getinverse()          ## set m to value of inverse
-    if(!is.null(m)) {            ## if the inverse (m) isn't null
+cacheSolve <- function(x, ...) { 
+    m <- x$getinverse()
+    if(!is.null(m)) {
         message("getting cached data")
-        return(m)                ## return it along with a message to user, then end
+        return(m)
     }
-    data <- x$get()              ## otherwise (if m was null)
-    m <- solve(data, ...)        ## solve for the inverse
-    x$setinverse(m)              ## set m to the inverse
-    m                            ## return m
+    data <- x$get()
+    m <- solve(data, ...)
+    x$setinverse(m)
+    m
 }
 
-## reminder where file is:  setwd("../ProgrammingAssignment2")
+## reminder which directory this file is in:  setwd("../ProgrammingAssignment2")
